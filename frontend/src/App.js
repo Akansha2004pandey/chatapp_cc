@@ -10,6 +10,7 @@ import { setSocket } from './redux/socketSlice';
 import { setOnlineUsers } from './redux/userSlice';
 import { BASE_URL } from '.';
 
+
 const router = createBrowserRouter([
   {
     path:"/",
@@ -36,7 +37,10 @@ function App() {
       const socketio = io(`${BASE_URL}`, {
           query:{
             userId:authUser._id
-          }
+          },
+          secure: true,
+          transports: ["websocket", "polling"]
+        
       });
       dispatch(setSocket(socketio));
 
